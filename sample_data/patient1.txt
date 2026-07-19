@@ -1,0 +1,16 @@
+Patient Name: John Smith
+
+Phone: 9876543210
+
+Email: johnsmith@gmail.com
+
+DOB: 12/05/1998
+
+Address: Hyderabad, Telangana
+
+Aadhaar: 1234 5678 9012
+
+Symptoms:
+Fever
+Cold
+Headache
