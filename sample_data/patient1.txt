@@ -1,5 +1,9 @@
 Patient Name: John Smith
 
+Doctor: Dr. Rajesh Kumar
+
+Hospital: Apollo Hospital
+
 Phone: 9876543210
 
 Email: johnsmith@gmail.com
@@ -10,7 +14,10 @@ Address: Hyderabad, Telangana
 
 Aadhaar: 1234 5678 9012
 
-Symptoms:
+Symptoms
+
 Fever
+
 Cold
+
 Headache
