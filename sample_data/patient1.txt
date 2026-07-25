@@ -1,23 +1,26 @@
 Patient Name: John Smith
 
-Doctor: Dr. Rajesh Kumar
+Age: 27
 
-Hospital: Apollo Hospital
+Gender: Male
 
 Phone: 9876543210
 
 Email: johnsmith@gmail.com
 
-DOB: 12/05/1998
+Date of Birth: 12/05/1998
+
+Aadhaar Number: 1234 5678 9012
+
+Hospital: Apollo Hospital
+
+Doctor: Rajesh Kumar
 
 Address: Hyderabad, Telangana
 
-Aadhaar: 1234 5678 9012
+Diagnosis:
+Patient is suffering from viral fever and mild dehydration.
 
-Symptoms
-
-Fever
-
-Cold
-
-Headache
+Prescription:
+Paracetamol 650mg twice daily for 5 days.
+Drink plenty of water and take adequate rest.
