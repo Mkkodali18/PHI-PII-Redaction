@@ -1,10 +1,17 @@
 import streamlit as st
-import re
+from regex_patterns import (
+    EMAIL_PATTERN,
+    PHONE_PATTERN,
+    DOB_PATTERN,
+    AADHAAR_PATTERN
+)
+from utils import find_matches
+from spacy_detector import detect_entities
 from redactor import redact_text
 
-# ----------------------------------------
+# -------------------------------------------------
 # Page Configuration
-# ----------------------------------------
+# -------------------------------------------------
 
 st.set_page_config(
     page_title="PHI / PII Redaction Dashboard",
@@ -12,38 +19,42 @@ st.set_page_config(
     layout="wide"
 )
 
-# ----------------------------------------
+# -------------------------------------------------
 # Sidebar
-# ----------------------------------------
+# -------------------------------------------------
 
-st.sidebar.title("🛡️ Project Information")
+st.sidebar.title("🛡️ PHI / PII Redaction")
 
-st.sidebar.write("Project : PHI / PII Redaction")
+st.sidebar.markdown("---")
 
-st.sidebar.write("Developer : Kodali Mohana Krishna")
+st.sidebar.write("Developer")
+st.sidebar.success("Kodali Mohana Krishna")
 
-st.sidebar.write("Version : 1.0")
+st.sidebar.write("Technology")
+st.sidebar.info("Python\nRegex\nspaCy\nStreamlit")
 
-st.sidebar.success("Week 4")
+st.sidebar.markdown("---")
 
-# ----------------------------------------
-# Main Title
-# ----------------------------------------
+st.sidebar.write("Version 1.0")
+
+# -------------------------------------------------
+# Title
+# -------------------------------------------------
 
 st.title("🛡️ PHI / PII Redaction Pipeline")
 
 st.write(
-    "Upload a patient record to detect and automatically redact sensitive information."
+    "Upload a patient medical record to detect and redact sensitive information."
 )
 
-st.divider()
+st.markdown("---")
 
-# ----------------------------------------
+# -------------------------------------------------
 # Upload
-# ----------------------------------------
+# -------------------------------------------------
 
 uploaded_file = st.file_uploader(
-    "Upload Patient Record",
+    "📂 Upload Patient Record",
     type=["txt"]
 )
 
@@ -51,97 +62,115 @@ if uploaded_file is not None:
 
     text = uploaded_file.read().decode("utf-8")
 
-    # -----------------------------
-    # Original Record
-    # -----------------------------
+    # ---------------------------------------------
+    # Detection
+    # ---------------------------------------------
 
-    st.subheader("📄 Original Patient Record")
+    emails = find_matches(EMAIL_PATTERN, text)
 
-    st.text_area(
-        "Original",
-        text,
-        height=250
-    )
+    phones = find_matches(PHONE_PATTERN, text)
 
-    # -----------------------------
-    # Regex Detection
-    # -----------------------------
+    dates = find_matches(DOB_PATTERN, text)
 
-    EMAIL_PATTERN = r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}"
+    aadhaar = find_matches(AADHAAR_PATTERN, text)
 
-    PHONE_PATTERN = r"\b[6-9]\d{9}\b"
+    persons, locations, organizations = detect_entities(text)
 
-    DOB_PATTERN = r"\b\d{2}/\d{2}/\d{4}\b"
-
-    AADHAAR_PATTERN = r"\b\d{4}\s\d{4}\s\d{4}\b"
-
-    emails = re.findall(EMAIL_PATTERN, text)
-
-    phones = re.findall(PHONE_PATTERN, text)
-
-    dob = re.findall(DOB_PATTERN, text)
-
-    aadhaar = re.findall(AADHAAR_PATTERN, text)
-
-    # -----------------------------
-    # Dashboard Cards
-    # -----------------------------
+    # ---------------------------------------------
+    # Metrics
+    # ---------------------------------------------
 
     st.subheader("📊 Detection Summary")
 
     c1, c2, c3, c4 = st.columns(4)
 
     c1.metric("Emails", len(emails))
-
     c2.metric("Phones", len(phones))
+    c3.metric("Persons", len(persons))
+    c4.metric("Organizations", len(organizations))
 
-    c3.metric("DOB", len(dob))
+    st.markdown("---")
 
-    c4.metric("Aadhaar", len(aadhaar))
+    # ---------------------------------------------
+    # Original Text
+    # ---------------------------------------------
 
-    st.divider()
+    left, right = st.columns(2)
 
-    # -----------------------------
-    # Detection Results
-    # -----------------------------
+    with left:
 
-    st.subheader("🔍 Detection Results")
+        st.subheader("📄 Original Patient Record")
 
-    st.write("### Emails")
-    st.write(emails)
+        st.text_area(
+            "Original",
+            text,
+            height=350
+        )
 
-    st.write("### Phone Numbers")
-    st.write(phones)
-
-    st.write("### DOB")
-    st.write(dob)
-
-    st.write("### Aadhaar")
-    st.write(aadhaar)
-
-    st.divider()
-
-    # -----------------------------
-    # Redacted Record
-    # -----------------------------
+    # ---------------------------------------------
+    # Redacted Text
+    # ---------------------------------------------
 
     redacted = redact_text(text)
 
-    st.subheader("🛡️ Redacted Patient Record")
+    with right:
 
-    st.text_area(
-        "Redacted",
-        redacted,
-        height=250
-    )
+        st.subheader("🛡️ Redacted Patient Record")
+
+        st.text_area(
+            "Redacted",
+            redacted,
+            height=350
+        )
+
+    st.markdown("---")
+
+    # ---------------------------------------------
+    # Detection Results
+    # ---------------------------------------------
+
+    st.subheader("🔍 Detection Results")
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+
+        st.success("📧 Emails")
+        st.write(emails)
+
+        st.success("📞 Phone Numbers")
+        st.write(phones)
+
+        st.success("📅 Date of Birth")
+        st.write(dates)
+
+        st.success("🪪 Aadhaar Numbers")
+        st.write(aadhaar)
+
+    with col2:
+
+        st.success("👤 Person Names")
+        st.write(persons)
+
+        st.success("📍 Locations")
+        st.write(locations)
+
+        st.success("🏥 Organizations")
+        st.write(organizations)
+
+    st.markdown("---")
+
+    # ---------------------------------------------
+    # Download
+    # ---------------------------------------------
 
     st.download_button(
-        "⬇ Download Redacted File",
-        redacted,
+        label="⬇ Download Redacted File",
+        data=redacted,
         file_name="redacted_patient_record.txt",
         mime="text/plain"
     )
 
 else:
 
-    st.info("Please upload a patient record.")
+    st.info("Please upload a patient record (.txt)")
