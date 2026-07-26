@@ -1,0 +1,33 @@
+Patient ID: P1006
+
+Name: Ananya Verma
+
+Age: 19
+
+Gender: Female
+
+Phone: 8899001122
+
+Email: ananya.verma@gmail.com
+
+DOB: 07/08/2006
+
+Aadhaar: 8765 4321 1098
+
+Address: Gachibowli, Hyderabad, Telangana
+
+Hospital: Continental Hospitals
+
+Doctor: Dr. Ramesh Gupta
+
+Blood Group: O-
+
+Diagnosis: Viral Fever
+
+Prescription:
+Paracetamol 650mg
+Vitamin C Tablets
+
+Emergency Contact:
+Rohit Verma
+Phone: 9000112233

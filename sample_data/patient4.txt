@@ -1,0 +1,33 @@
+Patient ID: P1004
+
+Name: Priya Reddy
+
+Age: 28
+
+Gender: Female
+
+Phone: 9876123456
+
+Email: priyareddy@gmail.com
+
+DOB: 14/03/1997
+
+Aadhaar: 7890 1234 5678
+
+Address: Vijayawada, Andhra Pradesh
+
+Hospital: Rainbow Children's Hospital
+
+Doctor: Dr. Karthik Rao
+
+Blood Group: A-
+
+Diagnosis: Migraine
+
+Prescription:
+Paracetamol 650mg
+SOS for headache.
+
+Emergency Contact:
+Suresh Reddy
+Phone: 9123409876

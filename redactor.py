@@ -1,30 +1,73 @@
 import re
 
-# -----------------------------
-# Regex Patterns
-# -----------------------------
+from regex_patterns import (
+    EMAIL_PATTERN,
+    PHONE_PATTERN,
+    DOB_PATTERN,
+    AADHAAR_PATTERN,
+)
 
-EMAIL_PATTERN = r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}"
+from spacy_detector import detect_entities
 
-PHONE_PATTERN = r"\b[6-9]\d{9}\b"
-
-DOB_PATTERN = r"\b\d{2}/\d{2}/\d{4}\b"
-
-AADHAAR_PATTERN = r"\b\d{4}\s\d{4}\s\d{4}\b"
-
-
-# -----------------------------
-# Redaction Function
-# -----------------------------
 
 def redact_text(text):
+    """
+    Automatically redact PHI / PII information.
+    """
 
-    text = re.sub(EMAIL_PATTERN, "[EMAIL REDACTED]", text)
+    # -------------------------
+    # Regex Redaction
+    # -------------------------
 
-    text = re.sub(PHONE_PATTERN, "[PHONE REDACTED]", text)
+    text = re.sub(
+        EMAIL_PATTERN,
+        "[EMAIL]",
+        text
+    )
 
-    text = re.sub(DOB_PATTERN, "[DOB REDACTED]", text)
+    text = re.sub(
+        PHONE_PATTERN,
+        "[PHONE]",
+        text
+    )
 
-    text = re.sub(AADHAAR_PATTERN, "[AADHAAR REDACTED]", text)
+    text = re.sub(
+        DOB_PATTERN,
+        "[DOB]",
+        text
+    )
+
+    text = re.sub(
+        AADHAAR_PATTERN,
+        "[AADHAAR]",
+        text
+    )
+
+    # -------------------------
+    # spaCy Entity Redaction
+    # -------------------------
+
+    persons, locations, organizations = detect_entities(text)
+
+    # Replace person names
+    for person in sorted(persons, key=len, reverse=True):
+        text = text.replace(
+            person,
+            "[PERSON]"
+        )
+
+    # Replace locations
+    for location in sorted(locations, key=len, reverse=True):
+        text = text.replace(
+            location,
+            "[LOCATION]"
+        )
+
+    # Replace organizations
+    for org in sorted(organizations, key=len, reverse=True):
+        text = text.replace(
+            org,
+            "[ORGANIZATION]"
+        )
 
     return text
