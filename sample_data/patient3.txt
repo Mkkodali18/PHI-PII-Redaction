@@ -1,0 +1,33 @@
+Patient ID: P1003
+
+Name: Rahul Sharma
+
+Age: 41
+
+Gender: Male
+
+Phone: 9988112233
+
+Email: rahul.sharma@yahoo.com
+
+DOB: 21/01/1984
+
+Aadhaar: 5678 1234 9876
+
+Address: Kukatpally, Hyderabad, Telangana
+
+Hospital: KIMS Hospital
+
+Doctor: Dr. Sneha Reddy
+
+Blood Group: B+
+
+Diagnosis: Type 2 Diabetes
+
+Prescription:
+Metformin 500mg
+Twice daily after meals.
+
+Emergency Contact:
+Priya Sharma
+Phone: 9876501234

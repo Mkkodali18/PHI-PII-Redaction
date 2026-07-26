@@ -1,0 +1,33 @@
+Patient ID: P1002
+
+Name: Sarah Johnson
+
+Age: 32
+
+Gender: Female
+
+Phone: 9123456789
+
+Email: sarah.johnson@gmail.com
+
+DOB: 18/09/1992
+
+Aadhaar: 4567 8901 2345
+
+Address: Banjara Hills, Hyderabad, Telangana
+
+Hospital: Yashoda Hospital
+
+Doctor: Dr. Anil Kumar
+
+Blood Group: O+
+
+Diagnosis: Hypertension
+
+Prescription:
+Amlodipine 5mg
+One tablet daily after breakfast.
+
+Emergency Contact:
+Michael Johnson
+Phone: 9988776655

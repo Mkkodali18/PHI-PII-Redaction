@@ -16,7 +16,7 @@ Hospital: Apollo Hospital
 
 Doctor: Rajesh Kumar
 
-Address: Hyderabad, Telangana
+Address: Hyderabad,Telangana
 
 Diagnosis:
 Patient is suffering from viral fever and mild dehydration.

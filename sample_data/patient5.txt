@@ -1,0 +1,33 @@
+Patient ID: P1005
+
+Name: Mohammed Arif
+
+Age: 53
+
+Gender: Male
+
+Phone: 9012345678
+
+Email: arif.mohammed@gmail.com
+
+DOB: 09/11/1971
+
+Aadhaar: 2345 6789 1234
+
+Address: Secunderabad, Telangana
+
+Hospital: Care Hospitals
+
+Doctor: Dr. Kavitha Rao
+
+Blood Group: AB+
+
+Diagnosis: Coronary Artery Disease
+
+Prescription:
+Aspirin 75mg
+Atorvastatin 20mg
+
+Emergency Contact:
+Ayesha Arif
+Phone: 9988123456

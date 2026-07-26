@@ -219,3 +219,284 @@ if uploaded_file is not None:
 
     st.markdown("---")
 
+    # ============================================
+    # ORIGINAL VS REDACTED RECORD
+    # ============================================
+
+    st.subheader("📄 Patient Record Preview")
+
+    left, right = st.columns(2)
+
+    with left:
+
+        st.markdown("### 📄 Original Patient Record")
+
+        st.text_area(
+            label="Original",
+            value=text,
+            height=350
+        )
+
+    with right:
+
+        st.markdown("### 🛡️ Redacted Patient Record")
+
+        st.text_area(
+            label="Redacted",
+            value=redacted_text,
+            height=350
+        )
+
+    st.markdown("")
+
+    st.download_button(
+        label="⬇ Download Redacted Patient Record",
+        data=redacted_text,
+        file_name="redacted_patient_record.txt",
+        mime="text/plain"
+    )
+
+    st.markdown("---")
+
+    # ============================================
+    # DETECTION DETAILS
+    # ============================================
+
+    st.subheader("🔍 PHI / PII Detection Details")
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+
+        with st.expander("📧 Email Addresses", expanded=True):
+
+            if emails:
+                for item in emails:
+                    st.success(item)
+            else:
+                st.info("No Emails Found")
+
+        with st.expander("📱 Phone Numbers", expanded=True):
+
+            if phones:
+                for item in phones:
+                    st.success(item)
+            else:
+                st.info("No Phone Numbers Found")
+
+        with st.expander("📅 Dates of Birth", expanded=False):
+
+            if dates:
+                for item in dates:
+                    st.success(item)
+            else:
+                st.info("No DOB Found")
+
+        with st.expander("🪪 Aadhaar Numbers", expanded=False):
+
+            if aadhaar:
+                for item in aadhaar:
+                    st.success(item)
+            else:
+                st.info("No Aadhaar Found")
+
+    with col2:
+
+        with st.expander("👤 Person Names", expanded=True):
+
+            if persons:
+                for item in persons:
+                    st.success(item)
+            else:
+                st.info("No Person Found")
+
+        with st.expander("📍 Locations", expanded=True):
+
+            if locations:
+                for item in locations:
+                    st.success(item)
+            else:
+                st.info("No Location Found")
+
+        with st.expander("🏥 Organizations", expanded=True):
+
+            if organizations:
+                for item in organizations:
+                    st.success(item)
+            else:
+                st.info("No Organization Found")
+
+    st.markdown("---")
+
+        # ============================================
+    # ANALYTICS DASHBOARD
+    # ============================================
+
+    st.subheader("📊 Analytics Dashboard")
+
+    chart_data = pd.DataFrame({
+        "Category": [
+            "Emails",
+            "Phones",
+            "DOB",
+            "Aadhaar",
+            "Persons",
+            "Locations",
+            "Organizations"
+        ],
+        "Count": [
+            len(emails),
+            len(phones),
+            len(dates),
+            len(aadhaar),
+            len(persons),
+            len(locations),
+            len(organizations)
+        ]
+    })
+
+    left_chart, right_chart = st.columns(2)
+
+    with left_chart:
+
+        pie = px.pie(
+            chart_data,
+            values="Count",
+            names="Category",
+            hole=0.45,
+            title="PHI / PII Distribution"
+        )
+
+        pie.update_layout(
+            height=450,
+            legend_title="Detected Entities"
+        )
+
+        st.plotly_chart(
+            pie,
+            use_container_width=True
+        )
+
+    with right_chart:
+
+        bar = px.bar(
+            chart_data,
+            x="Category",
+            y="Count",
+            text="Count",
+            title="Detection Statistics"
+        )
+
+        bar.update_traces(
+            textposition="outside"
+        )
+
+        bar.update_layout(
+            height=450,
+            xaxis_title="Entity Type",
+            yaxis_title="Count"
+        )
+
+        st.plotly_chart(
+            bar,
+            use_container_width=True
+        )
+
+    st.markdown("---")
+
+    # ============================================
+    # PROJECT STATISTICS
+    # ============================================
+
+    st.subheader("📈 Overall Statistics")
+
+    a, b, c = st.columns(3)
+
+    with a:
+        st.metric(
+            "Characters Analysed",
+            len(text)
+        )
+
+    with b:
+        st.metric(
+            "Total PHI / PII",
+            total_detected
+        )
+
+    with c:
+
+        if total_detected > 0:
+            st.metric(
+                "Privacy Status",
+                "Sensitive"
+            )
+        else:
+            st.metric(
+                "Privacy Status",
+                "Safe"
+            )
+
+    st.markdown("---")
+
+    # ============================================
+    # DETECTION TABLE
+    # ============================================
+
+    st.subheader("📋 Detection Summary Table")
+
+    table = pd.DataFrame({
+
+        "Entity":[
+            "Emails",
+            "Phone Numbers",
+            "DOB",
+            "Aadhaar",
+            "Persons",
+            "Locations",
+            "Organizations"
+        ],
+
+        "Detected":[
+            len(emails),
+            len(phones),
+            len(dates),
+            len(aadhaar),
+            len(persons),
+            len(locations),
+            len(organizations)
+        ]
+
+    })
+
+    st.dataframe(
+        table,
+        use_container_width=True
+    )
+
+    st.markdown("---")
+
+    # ============================================
+    # DOWNLOAD BUTTON
+    # ============================================
+
+    st.download_button(
+
+        label="⬇ Download Redacted Record",
+
+        data=redacted_text,
+
+        file_name="redacted_patient_record.txt",
+
+        mime="text/plain"
+
+    )
+
+    st.markdown("---")
+
+    st.success("✅ Analysis Completed Successfully!")
+
+    st.markdown("""
+
+""")
+
