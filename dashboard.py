@@ -98,6 +98,42 @@ section[data-testid="stSidebar"] *{
 # SIDEBAR
 # -------------------------------
 
+with st.sidebar:
+    st.title("🛡 PHI / PII Redaction")
+
+    st.markdown("---")
+
+    st.subheader("📌 Project Information")
+
+    st.write("**Developer:** Kodali Mohana Krishna")
+    st.write("**Version:** 1.0")
+    st.write("**Detection Engine:** Regex + spaCy")
+    st.write("**Framework:** Streamlit")
+
+    st.markdown("---")
+
+    st.subheader("📊 Features")
+
+    st.markdown("""
+    ✅ Email Detection
+
+    ✅ Phone Detection
+
+    ✅ Person Detection
+
+    ✅ Organization Detection
+
+    ✅ DOB Detection
+
+    ✅ Aadhaar Detection
+
+    ✅ Automatic Redaction
+    """)
+
+    st.markdown("---")
+
+    st.success("System Status: Ready")
+
 st.sidebar.title("🛡️ PHI / PII")
 
 st.sidebar.markdown("---")
