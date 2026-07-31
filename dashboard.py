@@ -200,6 +200,13 @@ uploaded_file = st.file_uploader(
 )
 
 if uploaded_file is not None:
+    st.success("File uploaded successfully!")
+
+    st.write("**File Name:**", uploaded_file.name)
+    st.write("**File Type:**", uploaded_file.type)
+    st.write("**File Size:**", round(uploaded_file.size / 1024, 2), "KB")
+
+if uploaded_file is not None:
 
     text = uploaded_file.read().decode("utf-8")
 
