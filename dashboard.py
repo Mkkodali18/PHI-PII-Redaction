@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+import time
 
 from regex_patterns import (
     EMAIL_PATTERN,
@@ -242,7 +243,6 @@ if uploaded_file is not None:
         + len(locations)
         + len(organizations)
     )
-
     st.markdown("---")
 
     st.subheader("📊 Detection Summary")
@@ -260,18 +260,18 @@ if uploaded_file is not None:
     c6.metric("🪪 Aadhaar", len(aadhaar))
     c7.metric("📈 Total PHI", total_detected)
 
+    st.info(f"🔍 Total PHI/PII Detected: {total_detected}")
+
     st.markdown("---")
 
     # ============================================
     # ORIGINAL VS REDACTED RECORD
     # ============================================
-
     st.subheader("📄 Patient Record Preview")
 
     left, right = st.columns(2)
 
     with left:
-
         st.markdown("### 📄 Original Patient Record")
 
         st.text_area(
@@ -281,7 +281,6 @@ if uploaded_file is not None:
         )
 
     with right:
-
         st.markdown("### 🛡️ Redacted Patient Record")
 
         st.text_area(
@@ -312,7 +311,6 @@ if uploaded_file is not None:
     with col1:
 
         with st.expander("📧 Email Addresses", expanded=True):
-
             if emails:
                 for item in emails:
                     st.success(item)
@@ -320,7 +318,6 @@ if uploaded_file is not None:
                 st.info("No Emails Found")
 
         with st.expander("📱 Phone Numbers", expanded=True):
-
             if phones:
                 for item in phones:
                     st.success(item)
@@ -328,7 +325,6 @@ if uploaded_file is not None:
                 st.info("No Phone Numbers Found")
 
         with st.expander("📅 Dates of Birth", expanded=False):
-
             if dates:
                 for item in dates:
                     st.success(item)
@@ -336,7 +332,6 @@ if uploaded_file is not None:
                 st.info("No DOB Found")
 
         with st.expander("🪪 Aadhaar Numbers", expanded=False):
-
             if aadhaar:
                 for item in aadhaar:
                     st.success(item)
@@ -346,7 +341,6 @@ if uploaded_file is not None:
     with col2:
 
         with st.expander("👤 Person Names", expanded=True):
-
             if persons:
                 for item in persons:
                     st.success(item)
@@ -354,7 +348,6 @@ if uploaded_file is not None:
                 st.info("No Person Found")
 
         with st.expander("📍 Locations", expanded=True):
-
             if locations:
                 for item in locations:
                     st.success(item)
@@ -362,7 +355,6 @@ if uploaded_file is not None:
                 st.info("No Location Found")
 
         with st.expander("🏥 Organizations", expanded=True):
-
             if organizations:
                 for item in organizations:
                     st.success(item)
